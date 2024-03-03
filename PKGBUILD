@@ -22,9 +22,12 @@ pkgname=ffmpeg-rockchip-git
 pkgver=6.1.r112619.99ea69d6d4
 pkgrel=1
 _obs_deps_tag=2023-04-03
+_github_user=nyanmisaka
+_github_repo=ffmpeg-rockchip
+_github_branch=master
 pkgdesc='Complete solution to record, convert and stream audio and video supporting rockchip MPP hardware decoder'
 arch=(aarch64 arm7f)
-url=https://github.com/nyanmisaka/ffmpeg-rockchip.git
+url="https://github.com/$_github_user/$_github_repo.git"
 license=(GPL3)
 options=(!lto strip)
 depends=(
@@ -39,42 +42,39 @@ depends=(
   gsm
   jack
   lame
-  libass.so
+  libass
   libavc1394
-  libbluray.so
-  libbs2b.so
+  libbluray
+  libbs2b
   dav1d
   libdrm
-  libfreetype.so
+  freetype2
   libgl
   libiec61883
   libjxl
   libmodplug
-  libopenmpt.so
+  libopenmpt
   libpulse
   libraw1394
-  librsvg-2.so
+  librsvg
   libsoxr
   libssh
   libtheora
-  libva.so
-  libva-drm.so
-  libva-x11.so
+  libva
   libvdpau
   vid.stab
-  libvorbisenc.so
-  libvorbis.so
-  libvpx.so	
+  libvorbis
+  libvpx	
   libwebp
   libx11
-  libx264.so
-  libx265.so
+  x264
+  x265
   libxcb
   libxext
   libxml2
   libxv
-  libxvidcore.so
-  libzimg.so
+  xvidcore
+  zimg
   ocl-icd
   onevpl
   opencore-amr
@@ -88,7 +88,6 @@ depends=(
   xz
   zlib
   mpp
-  libyuv
   librist
   librga-multi
 )
@@ -101,9 +100,10 @@ makedepends=(
   mesa
   nasm
   opencl-headers
-  mpp-git
+  mpp
   libyuv
   perl
+  gitweb-dlagent
 )
 
 optdepends=(
@@ -133,8 +133,11 @@ replaces=(
   ffmpeg-mpp
 )
 
+DLAGENTS+=('gitweb-dlagent::/usr/bin/gitweb-dlagent sync %u')
+_url_ffmpeg="gitweb-dlagent://github.com/$_github_user/$_github_repo#branch=$_github_branch"
+
 source=(
-  "git+${url}#branch=master"
+  "$_url_ffmpeg"
   "obs-deps::git+https://github.com/obsproject/obs-deps.git#tag=${_obs_deps_tag}"
   add-av_stream_get_first_dts-for-chromium.patch
 )
@@ -159,7 +162,9 @@ prepare() {
 
 pkgver() {
   cd ffmpeg-rockchip
-  printf "%s.r%s.%s" "$(cat RELEASE)" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  local _rev=$(gitweb-dlagent version ${_url_ffmpeg} --pattern \{revision\})
+  local _com=$(gitweb-dlagent version ${_url_ffmpeg} --pattern \{commit:.10s\})
+  printf "%s.r%s.%s" "$(cat RELEASE)" $_rev $_com
 }
 
 build() {
