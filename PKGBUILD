@@ -18,7 +18,7 @@
 #  - interface rockchip rga from kernel to userspace directly
 #  - hack around rockchips vp8&9 colorspace is not detected when used with Firefox
 
-pkgname=ffmpeg-rockchip-git
+pkgname=ffmpeg-mpp-git
 pkgver=6.1.r112619.99ea69d6d4
 pkgrel=1
 _obs_deps_tag=2023-04-03
@@ -122,6 +122,8 @@ provides=(
   libswscale.so
   "ffmpeg=${pkgver}-${pkgrel}"
   "ffmpeg-obs=${pkgver}-${pkgrel}"
+  "ffmpeg-rockchip"
+  "ffmpeg-rockchip-git"
 )
 
 conflicts=(
@@ -129,8 +131,10 @@ conflicts=(
   $pkgname
 )
 
+# to prevent multiple previous ffmpeg packages colliding
 replaces=(
-  ffmpeg-mpp
+  ffmpeg-rockchip
+  ffmpeg-rockchip-git
 )
 
 DLAGENTS+=('gitweb-dlagent::/usr/bin/gitweb-dlagent sync %u')
