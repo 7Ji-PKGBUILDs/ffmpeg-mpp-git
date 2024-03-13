@@ -103,7 +103,6 @@ makedepends=(
   mpp
   libyuv
   perl
-  gitweb-dlagent
 )
 
 optdepends=(
@@ -137,8 +136,7 @@ replaces=(
   ffmpeg-rockchip-git
 )
 
-DLAGENTS+=('gitweb-dlagent::/usr/bin/gitweb-dlagent sync %u')
-_url_ffmpeg="gitweb-dlagent://github.com/$_github_user/$_github_repo#branch=$_github_branch"
+_url_ffmpeg="https://github.com/$_github_user/$_github_repo#branch=$_github_branch"
 
 source=(
   "$_url_ffmpeg"
@@ -166,9 +164,7 @@ prepare() {
 
 pkgver() {
   cd ffmpeg-rockchip
-  local _rev=$(gitweb-dlagent version ${_url_ffmpeg} --pattern \{revision\})
-  local _com=$(gitweb-dlagent version ${_url_ffmpeg} --pattern \{commit:.10s\})
-  printf "%s.r%s.%s" "$(cat RELEASE)" $_rev $_com
+  printf "%s.r%s.%s" "$(cat RELEASE)" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 build() {

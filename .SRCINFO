@@ -1,4 +1,4 @@
-pkgbase = ffmpeg-rockchip-git
+pkgbase = ffmpeg-mpp-git
 	pkgdesc = Complete solution to record, convert and stream audio and video supporting rockchip MPP hardware decoder
 	pkgver = 6.1.r112619.99ea69d6d4
 	pkgrel = 1
@@ -17,7 +17,6 @@ pkgbase = ffmpeg-rockchip-git
 	makedepends = mpp
 	makedepends = libyuv
 	makedepends = perl
-	makedepends = gitweb-dlagent
 	depends = aom
 	depends = alsa-lib
 	depends = cairo
@@ -89,12 +88,15 @@ pkgbase = ffmpeg-rockchip-git
 	provides = libswscale.so
 	provides = ffmpeg=6.1.r112619.99ea69d6d4-1
 	provides = ffmpeg-obs=6.1.r112619.99ea69d6d4-1
+	provides = ffmpeg-rockchip
+	provides = ffmpeg-rockchip-git
 	conflicts = ffmpeg
-	conflicts = ffmpeg-rockchip-git
-	replaces = ffmpeg-mpp
+	conflicts = ffmpeg-mpp-git
+	replaces = ffmpeg-rockchip
+	replaces = ffmpeg-rockchip-git
 	options = !lto
 	options = strip
-	source = gitweb-dlagent://github.com/nyanmisaka/ffmpeg-rockchip#branch=master
+	source = https://github.com/nyanmisaka/ffmpeg-rockchip#branch=master
 	source = obs-deps::git+https://github.com/obsproject/obs-deps.git#tag=2023-04-03
 	source = add-av_stream_get_first_dts-for-chromium.patch
 	validpgpkeys = DD1EC9E8DE085C629B3E1846B18E8928B3948D64
@@ -102,4 +104,4 @@ pkgbase = ffmpeg-rockchip-git
 	b2sums = SKIP
 	b2sums = 555274228e09a233d92beb365d413ff5c718a782008075552cafb2130a3783cf976b51dfe4513c15777fb6e8397a34122d475080f2c4483e8feea5c0d878e6de
 
-pkgname = ffmpeg-rockchip-git
+pkgname = ffmpeg-mpp-git
