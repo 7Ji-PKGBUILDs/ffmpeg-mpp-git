@@ -18,16 +18,19 @@
 #  - interface rockchip rga from kernel to userspace directly
 #  - hack around rockchips vp8&9 colorspace is not detected when used with Firefox
 
-pkgname=ffmpeg-mpp-git
-pkgver=6.1.r112619.99ea69d6d4
-pkgrel=1
+_pkgname=ffmpeg-mpp
 _obs_deps_tag=2023-04-03
 _github_user=nyanmisaka
 _github_repo=ffmpeg-rockchip
 _github_branch=master
+_srcname="${_github_repo}"
+
+pkgname="${_pkgname}"-git
+pkgver=6.1.r112619.99ea69d6d4
+pkgrel=1
 pkgdesc='Complete solution to record, convert and stream audio and video supporting rockchip MPP hardware decoder'
 arch=(aarch64 arm7f)
-url="https://github.com/$_github_user/$_github_repo.git"
+url="https://github.com/${_github_user}/${_github_repo}"
 license=(GPL3)
 options=(!lto strip)
 depends=(
@@ -127,20 +130,17 @@ provides=(
 
 conflicts=(
   ffmpeg
-  $pkgname
 )
 
 # to prevent multiple previous ffmpeg packages colliding
 replaces=(
-  ffmpeg-rockchip
-  ffmpeg-rockchip-git
+  "${_srcname}"
+  "${_srcname}"-git
 )
 
-_url_ffmpeg="https://github.com/$_github_user/$_github_repo#branch=$_github_branch"
-
 source=(
-  "$_url_ffmpeg"
-  "obs-deps::git+https://github.com/obsproject/obs-deps.git#tag=${_obs_deps_tag}"
+  "git+${url}.git#branch=${_github_branch}"
+  "git+https://github.com/obsproject/obs-deps.git#tag=${_obs_deps_tag}"
   add-av_stream_get_first_dts-for-chromium.patch
 )
 
@@ -151,7 +151,7 @@ b2sums=('SKIP'
 validpgpkeys=(DD1EC9E8DE085C629B3E1846B18E8928B3948D64) # Michael Niedermayer <michael@niedermayer.cc>
 
 prepare() {
-  cd ffmpeg-rockchip
+  cd "${_srcname}"
   sed -i 's/RTLD_LOCAL/RTLD_DEEPBIND/g' libavformat/avisynth.c
   patch -Np1 -i ../add-av_stream_get_first_dts-for-chromium.patch # https://crbug.com/1251779
   
@@ -163,12 +163,12 @@ prepare() {
 }
 
 pkgver() {
-  cd ffmpeg-rockchip
+  cd "${_srcname}"
   printf "%s.r%s.%s" "$(cat RELEASE)" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 build() {
-  cd ffmpeg-rockchip
+  cd "${_srcname}"
   [[ $CARCH == "armv7h" || $CARCH == "aarch64" ]] && CONFIG='--host-cflags="-fPIC"'
   ./configure \
     --prefix=/usr \
@@ -231,14 +231,14 @@ build() {
     --disable-doc \
     --enable-rkmpp \
     --enable-rkrga  $CONFIG
-  make ${MAKEFLAGS}
-  make ${MAKEFLAGS} tools/qt-faststart
-  make ${MAKEFLAGS} doc/ff{mpeg,play}.1
+  make
+  make tools/qt-faststart
+  make doc/ff{mpeg,play}.1
 }
 
 package() {
-  make ${MAKEFLAGS} DESTDIR="${pkgdir}" -C ffmpeg-rockchip install install-man
-  install -Dm 755 ffmpeg-rockchip/tools/qt-faststart "${pkgdir}"/usr/bin/
+  make DESTDIR="${pkgdir}" -C "${_srcname}" install install-man
+  install -Dm 755 "${_srcname}"/tools/qt-faststart "${pkgdir}"/usr/bin/
 }
 
 # vim: ts=2 sw=2 et:

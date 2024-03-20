@@ -2,7 +2,7 @@ pkgbase = ffmpeg-mpp-git
 	pkgdesc = Complete solution to record, convert and stream audio and video supporting rockchip MPP hardware decoder
 	pkgver = 6.1.r112619.99ea69d6d4
 	pkgrel = 1
-	url = https://github.com/nyanmisaka/ffmpeg-rockchip.git
+	url = https://github.com/nyanmisaka/ffmpeg-rockchip
 	arch = aarch64
 	arch = arm7f
 	license = GPL3
@@ -91,13 +91,12 @@ pkgbase = ffmpeg-mpp-git
 	provides = ffmpeg-rockchip
 	provides = ffmpeg-rockchip-git
 	conflicts = ffmpeg
-	conflicts = ffmpeg-mpp-git
 	replaces = ffmpeg-rockchip
 	replaces = ffmpeg-rockchip-git
 	options = !lto
 	options = strip
-	source = https://github.com/nyanmisaka/ffmpeg-rockchip#branch=master
-	source = obs-deps::git+https://github.com/obsproject/obs-deps.git#tag=2023-04-03
+	source = git+https://github.com/nyanmisaka/ffmpeg-rockchip.git#branch=master
+	source = git+https://github.com/obsproject/obs-deps.git#tag=2023-04-03
 	source = add-av_stream_get_first_dts-for-chromium.patch
 	validpgpkeys = DD1EC9E8DE085C629B3E1846B18E8928B3948D64
 	b2sums = SKIP
