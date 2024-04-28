@@ -15,7 +15,6 @@ pkgbase = ffmpeg-rockchip-git
 	makedepends = nasm
 	makedepends = opencl-headers
 	makedepends = mpp
-	makedepends = libyuv
 	makedepends = perl
 	makedepends = gitweb-dlagent
 	depends = aom
