@@ -104,7 +104,6 @@ makedepends=(
   nasm
   opencl-headers
   mpp
-  libyuv
   perl
 )
 
