@@ -76,7 +76,6 @@ depends=(
   xvidcore
   zimg
   ocl-icd
-  onevpl
   opencore-amr
   openjpeg2
   opus
@@ -216,7 +215,6 @@ build() {
     --enable-libv4l2 \
     --enable-libvidstab \
     --enable-libvorbis \
-    --enable-libvpl \
     --enable-libvpx \
     --enable-libwebp \
     --enable-libx264 \
