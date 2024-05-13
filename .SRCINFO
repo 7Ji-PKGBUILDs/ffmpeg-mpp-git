@@ -61,7 +61,6 @@ pkgbase = ffmpeg-mpp-git
 	depends = xvidcore
 	depends = zimg
 	depends = ocl-icd
-	depends = onevpl
 	depends = opencore-amr
 	depends = openjpeg2
 	depends = opus
