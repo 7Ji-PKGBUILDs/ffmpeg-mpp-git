@@ -22,7 +22,7 @@ _pkgname=ffmpeg-mpp
 _obs_deps_tag=2023-04-03
 _github_user=nyanmisaka
 _github_repo=ffmpeg-rockchip
-_github_branch=master
+_github_branch=7.0
 _srcname="${_github_repo}"
 
 pkgname="${_pkgname}"-git
