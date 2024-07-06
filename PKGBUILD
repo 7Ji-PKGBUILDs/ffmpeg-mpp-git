@@ -111,6 +111,7 @@ makedepends=(
   mesa
   nasm
   opencl-headers
+  vulkan-headers
   mpp
   perl
 )
