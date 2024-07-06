@@ -19,7 +19,7 @@
 #  - hack around rockchips vp8&9 colorspace is not detected when used with Firefox
 
 pkgname=ffmpeg-mpp-git
-pkgver=6.1.r112619.99ea69d6d4
+pkgver=7.0.1.r114633.342fe8368c
 pkgrel=1
 _obs_deps_tag=2023-04-03
 _github_user=nyanmisaka
@@ -31,29 +31,33 @@ url="https://github.com/$_github_user/$_github_repo.git"
 license=(GPL3)
 options=(!lto strip)
 depends=(
-  aom
   alsa-lib
-  cairo
   bzip2
+  cairo
+  dav1d
   fontconfig
+  freetype2
   fribidi
+  glib2
+  glibc
   gmp
-  gnutls
   gsm
+  harfbuzz
   jack
   lame
   libass
   libavc1394
   libbluray
   libbs2b
-  dav1d
   libdrm
-  freetype2
+  libdvdnav
+  libdvdread
   libgl
   libiec61883
   libjxl
   libmodplug
   libopenmpt
+  libplacebo
   libpulse
   libraw1394
   librsvg
@@ -62,29 +66,33 @@ depends=(
   libtheora
   libva
   libvdpau
-  vid.stab
   libvorbis
-  libvpx	
+  libvpx
   libwebp
   libx11
-  x264
-  x265
   libxcb
   libxext
   libxml2
   libxv
-  xvidcore
-  zimg
+  mbedtls2
   ocl-icd
   opencore-amr
   openjpeg2
   opus
-  rav1e
+  rubberband
   sdl2
+  snappy
   speex
   srt
   v4l-utils
+  vapoursynth
+  vid.stab
+  vulkan-icd-loader
+  x264
+  x265
+  xvidcore
   xz
+  zimg
   zlib
   mpp
   librist
@@ -94,6 +102,7 @@ makedepends=(
   amf-headers
   avisynthplus
   clang
+  frei0r-plugins
   git
   ladspa
   mesa
@@ -106,6 +115,7 @@ makedepends=(
 
 optdepends=(
   'avisynthplus: AviSynthPlus support'
+  'frei0r-plugins: Frei0r video effects support'
   'ladspa: LADSPA filters'
 )
 
@@ -170,8 +180,8 @@ pkgver() {
 }
 
 build() {
+  export PKG_CONFIG_PATH='/usr/lib/mbedtls2/pkgconfig'
   cd ffmpeg-rockchip
-  [[ $CARCH == "armv7h" || $CARCH == "aarch64" ]] && CONFIG='--host-cflags="-fPIC"'
   ./configure \
     --prefix=/usr \
     --disable-debug \
@@ -181,19 +191,21 @@ build() {
     --enable-avisynth \
     --enable-cuda-llvm \
     --enable-fontconfig \
+    --enable-frei0r \
     --enable-gmp \
-    --enable-gnutls \
     --enable-gpl \
     --enable-ladspa \
-    --enable-libaom \
     --enable-libass \
     --enable-libbluray \
     --enable-libbs2b \
     --enable-libdav1d \
     --enable-libdrm \
+    --enable-libdvdnav \
+    --enable-libdvdread \
     --enable-libfreetype \
     --enable-libfribidi \
     --enable-libgsm \
+    --enable-libharfbuzz \
     --enable-libiec61883 \
     --enable-libjack \
     --enable-libjxl \
@@ -204,9 +216,11 @@ build() {
     --enable-libopenjpeg \
     --enable-libopenmpt \
     --enable-libopus \
+    --enable-libplacebo \
     --enable-libpulse \
-    --enable-librav1e \
     --enable-librsvg \
+    --enable-librubberband \
+    --enable-libsnappy \
     --enable-libsoxr \
     --enable-libspeex \
     --enable-libsrt \
@@ -223,9 +237,11 @@ build() {
     --enable-libxml2 \
     --enable-libxvid \
     --enable-libzimg \
+    --enable-mbedtls \
     --enable-opencl \
     --enable-opengl \
     --enable-shared \
+    --enable-vapoursynth \
     --enable-version3 \
     --enable-librist \
     --disable-vulkan \
@@ -241,5 +257,3 @@ package() {
   make ${MAKEFLAGS} DESTDIR="${pkgdir}" -C ffmpeg-rockchip install install-man
   install -Dm 755 ffmpeg-rockchip/tools/qt-faststart "${pkgdir}"/usr/bin/
 }
-
-# vim: ts=2 sw=2 et:
