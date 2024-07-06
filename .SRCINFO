@@ -15,6 +15,7 @@ pkgbase = ffmpeg-mpp-git
 	makedepends = mesa
 	makedepends = nasm
 	makedepends = opencl-headers
+	makedepends = vulkan-headers
 	makedepends = mpp
 	makedepends = perl
 	depends = alsa-lib
