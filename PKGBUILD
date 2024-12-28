@@ -22,11 +22,11 @@ _pkgname=ffmpeg-mpp
 _obs_deps_tag=2023-04-03
 _github_user=nyanmisaka
 _github_repo=ffmpeg-rockchip
-_github_branch=7.0
+_github_branch=7.1
 _srcname="${_github_repo}"
 
 pkgname="${_pkgname}"-git
-pkgver=7.0.1.r114633.342fe8368c
+pkgver=7.1.r117254.dc1e883921
 pkgrel=1
 pkgdesc='Complete solution to record, convert and stream audio and video supporting rockchip MPP hardware decoder'
 arch=(aarch64 armv7h)
