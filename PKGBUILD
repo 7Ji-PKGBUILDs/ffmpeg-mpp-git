@@ -19,8 +19,8 @@
 #  - hack around rockchips vp8&9 colorspace is not detected when used with Firefox
 
 pkgname=ffmpeg-mpp-git
-pkgver=7.1.r117254.dc1e883921
-pkgrel=1
+pkgver=7.1.r117383.f5c7e0d63b
+pkgrel=2
 _obs_deps_tag=2023-04-03
 _github_user=nyanmisaka
 _github_repo=ffmpeg-rockchip
@@ -131,12 +131,14 @@ provides=(
   libswscale.so
   "ffmpeg=${pkgver}-${pkgrel}"
   "ffmpeg-obs=${pkgver}-${pkgrel}"
+  "ffmpeg-mpp"
   "ffmpeg-rockchip"
   "ffmpeg-rockchip-git"
 )
 
 conflicts=(
   ffmpeg
+  ffmpeg-mpp
   $pkgname
 )
 
