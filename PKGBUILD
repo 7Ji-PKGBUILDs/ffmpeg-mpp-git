@@ -26,8 +26,8 @@ _github_branch=7.1
 _srcname="${_github_repo}"
 
 pkgname="${_pkgname}"-git
-pkgver=7.1.r117254.dc1e883921
-pkgrel=1
+pkgver=7.1.r117383.f5c7e0d63b
+pkgrel=2
 pkgdesc='Complete solution to record, convert and stream audio and video supporting rockchip MPP hardware decoder'
 arch=(aarch64 armv7h)
 url="https://github.com/${_github_user}/${_github_repo}"
@@ -133,12 +133,14 @@ provides=(
   libswscale.so
   "ffmpeg=${pkgver}-${pkgrel}"
   "ffmpeg-obs=${pkgver}-${pkgrel}"
+  "ffmpeg-mpp"
   "ffmpeg-rockchip"
   "ffmpeg-rockchip-git"
 )
 
 conflicts=(
   ffmpeg
+  ffmpeg-mpp
 )
 
 # to prevent multiple previous ffmpeg packages colliding
