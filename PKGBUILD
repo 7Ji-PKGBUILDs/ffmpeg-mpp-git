@@ -19,7 +19,7 @@
 #  - hack around rockchips vp8&9 colorspace is not detected when used with Firefox
 
 pkgname=ffmpeg-mpp-git
-pkgver=7.1.r117383.f5c7e0d63b
+pkgver=7.1.1.r117415.7683d5eb4a
 pkgrel=2
 _obs_deps_tag=2023-04-03
 _github_user=nyanmisaka
