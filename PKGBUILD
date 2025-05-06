@@ -27,7 +27,7 @@ _srcname="${_github_repo}"
 
 pkgname="${_pkgname}"-git
 pkgver=7.1.1.r117415.7683d5eb4a
-pkgrel=2
+pkgrel=3
 pkgdesc='Complete solution to record, convert and stream audio and video supporting rockchip MPP hardware decoder'
 arch=(aarch64 armv7h)
 url="https://github.com/${_github_user}/${_github_repo}"
