@@ -20,7 +20,7 @@
 
 pkgname=ffmpeg-mpp-git
 pkgver=7.1.1.r117415.7683d5eb4a
-pkgrel=2
+pkgrel=3
 _obs_deps_tag=2023-04-03
 _github_user=nyanmisaka
 _github_repo=ffmpeg-rockchip
