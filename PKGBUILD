@@ -8,6 +8,7 @@ source+=("mpp.patch::https://github.com/nyanmisaka/ffmpeg-rockchip/compare/${_ff
 b2sums+=("SKIP")
 arch+=("aarch64" "arm7f")
 replaces=("ffmpeg-mpp-git")
+provides+=("ffmpeg")
 depends+=("mpp" "librga-multi")
 
 _pkgname=ffmpeg-mpp
