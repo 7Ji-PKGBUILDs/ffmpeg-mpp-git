@@ -2,7 +2,7 @@ CONFIG="--enable-rkmpp --enable-rkrga"
 eval "$(curl -s -L https://raw.githubusercontent.com/hbiyik/agrrepo/refs/heads/master/libinherit/remote.sh)"
 inherit https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/ffmpeg/
 
-_ffmpeg_base=9373b442a689455bb5fcfddcfe70dfb8e4352fbc
+_ffmpeg_base=6400860b9d4bec5ace91ec3a5e43ad76f9660579
 _ffmpeg_branch=7.1
 source+=("mpp.patch::https://github.com/nyanmisaka/ffmpeg-rockchip/compare/${_ffmpeg_base}...${_ffmpeg_branch}.patch")
 b2sums+=("SKIP")
