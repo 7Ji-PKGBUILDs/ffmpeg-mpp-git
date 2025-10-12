@@ -22,7 +22,7 @@ _pkgname=ffmpeg-mpp
 _obs_deps_tag=2023-04-03
 _github_user=nyanmisaka
 _github_repo=ffmpeg-rockchip
-_github_branch=7.1
+_github_branch=8.0
 _srcname="${_github_repo}"
 
 pkgname="${_pkgname}"-git
@@ -151,27 +151,11 @@ replaces=(
 
 source=(
   "git+${url}.git#branch=${_github_branch}"
-  "git+https://github.com/obsproject/obs-deps.git#tag=${_obs_deps_tag}"
-  add-av_stream_get_first_dts-for-chromium.patch
 )
 
-b2sums=('SKIP'
-        'SKIP'
-        '555274228e09a233d92beb365d413ff5c718a782008075552cafb2130a3783cf976b51dfe4513c15777fb6e8397a34122d475080f2c4483e8feea5c0d878e6de')
+b2sums=('SKIP')
 
 validpgpkeys=(DD1EC9E8DE085C629B3E1846B18E8928B3948D64) # Michael Niedermayer <michael@niedermayer.cc>
-
-prepare() {
-  cd "${_srcname}"
-  sed -i 's/RTLD_LOCAL/RTLD_DEEPBIND/g' libavformat/avisynth.c
-  patch -Np1 -i ../add-av_stream_get_first_dts-for-chromium.patch # https://crbug.com/1251779
-  
-  # This patch applies:
-  #  - Fix decoding of certain malformed FLV files
-  #  - Add additional CPU levels for libaom
-  patch -Np1 -i ../obs-deps/deps.ffmpeg/patches/FFmpeg/0001-flvdec-handle-unknown.patch
-  patch -Np1 -i ../obs-deps/deps.ffmpeg/patches/FFmpeg/0002-libaomenc-presets.patch
-}
 
 pkgver() {
   cd "${_srcname}"
