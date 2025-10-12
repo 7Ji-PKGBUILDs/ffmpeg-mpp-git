@@ -2,8 +2,8 @@ CONFIG="--enable-rkmpp --enable-rkrga"
 eval "$(curl -s -L https://raw.githubusercontent.com/hbiyik/agrrepo/refs/heads/master/libinherit/remote.sh)"
 inherit https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/ffmpeg/
 
-_ffmpeg_base=6400860b9d4bec5ace91ec3a5e43ad76f9660579
-_ffmpeg_branch=7.1
+_ffmpeg_base=e322e2e5d94100a2be0853033d6c124ec8249b78
+_ffmpeg_branch=8.0
 source+=("mpp.patch::https://github.com/nyanmisaka/ffmpeg-rockchip/compare/${_ffmpeg_base}...${_ffmpeg_branch}.patch")
 b2sums+=("SKIP")
 arch+=("aarch64" "arm7f")
@@ -11,9 +11,7 @@ replaces=("ffmpeg-mpp-git")
 provides+=("ffmpeg")
 depends+=("mpp" "librga-multi")
 
-_pkgname=ffmpeg-mpp
-old_pkgname=$pkgname
-pkgname=$_pkgname
+pkgname=ffmpeg-mpp
 
 
 prepare(){
@@ -21,21 +19,5 @@ prepare(){
   cd $srcdir/ffmpeg
   patch -p1 -N -i ../mpp.patch
   cd $srcdir
-  pkgname=$old_pkgname
   old_prepare
-  pkgname=$_pkgname
-}
-
-build(){
-  # pkgname is used in the build as variable so swap it
-  pkgname=$old_pkgname
-  old_build
-  pkgname=$_pkgname
-}
-
-package(){
-  # pkgname is used in the package as variable so swap it
-  pkgname=$old_pkgname
-  old_package
-  pkgname=$_pkgname
 }
