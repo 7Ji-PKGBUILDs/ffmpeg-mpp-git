@@ -15,9 +15,9 @@ pkgname=ffmpeg-mpp
 
 
 prepare(){
-  # patch with extra stuff
-  cd $srcdir/ffmpeg
-  patch -p1 -N -i ../mpp.patch
   cd $srcdir
   old_prepare
+  # patch with extra mpp stuff
+  cd $srcdir/ffmpeg
+  patch -p1 -N -i ../mpp.patch
 }
