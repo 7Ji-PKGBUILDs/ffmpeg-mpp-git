@@ -1,4 +1,4 @@
-CONFIG="--enable-rkmpp --enable-rkrga"
+CONFIG="--enable-rkmpp --enable-rkrga --enable-pic"
 eval "$(curl -s -L https://raw.githubusercontent.com/hbiyik/agrrepo/refs/heads/master/libinherit/remote.sh)"
 inherit https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/ffmpeg/
 
@@ -10,6 +10,7 @@ arch+=("aarch64" "arm7f")
 replaces=("ffmpeg-mpp-git")
 provides+=("ffmpeg")
 depends+=("mpp" "librga-multi")
+options=(!lto)
 
 pkgname=ffmpeg-mpp
 
