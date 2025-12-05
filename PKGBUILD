@@ -9,6 +9,7 @@ b2sums+=("SKIP")
 arch+=("aarch64" "arm7f")
 replaces=("ffmpeg-mpp-git")
 provides+=("ffmpeg")
+conflicts+=("ffmpeg")
 depends+=("mpp" "librga-multi")
 options=(!lto)
 
