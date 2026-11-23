@@ -2,7 +2,7 @@ eval "$(curl -s -L https://raw.githubusercontent.com/hbiyik/agrrepo/refs/heads/m
 inherit https://github.com/archlinuxarm/PKGBUILDs/raw/master/extra/ffmpeg/
 
 _ffmpeg_base=74e4393595cf2b5857f0da925c4e0dd74ea306e5
-_ffmpeg_branch=ffmpeg-rockchip-9.0.1
+_ffmpeg_branch=9.1
 source+=("mpp.patch::https://github.com/nyanmisaka/ffmpeg-rockchip/compare/${_ffmpeg_base}...${_ffmpeg_branch}.patch")
 b2sums+=("SKIP")
 arch+=("aarch64" "arm7f")
