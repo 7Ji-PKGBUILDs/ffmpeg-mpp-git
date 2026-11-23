@@ -41,6 +41,7 @@ build() {
     --enable-gnutls \
     --enable-gpl \
     --enable-ladspa \
+    --enable-libaom \
     --enable-libass \
     --enable-libbluray \
     --enable-libbs2b \
@@ -86,7 +87,6 @@ build() {
     --enable-libzimg \
     --enable-libzmq \
     --enable-opencl \
-    --enable-opengl \
     --enable-shared \
     --enable-vapoursynth \
     --enable-version3 \
